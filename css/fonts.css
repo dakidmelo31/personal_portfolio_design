@@ -1,0 +1,41 @@
+@font-face {
+    font-family: "Monotone";
+    src: url(monoton/Monoton-Regular.ttf);
+}
+@font-face {
+    font-family: "Righteous";
+    src: url(righteous/Righteous-Regular.ttf);
+}
+@font-face {
+    font-family: "Radish";
+    src: url(radish/Radish-Personal.otf);
+}
+@font-face {
+    font-family: "Alfa";
+    src: url(Alfa/AlfaSlabOne-Regular.ttf);
+}
+@font-face {
+    font-family: "Liquido";
+    src: url("fonts/Liquido/LIQUIDO\ Reguar\ 400.otf");
+}
+@font-face {
+    font-family: "Liquido";
+    font-style: italic;
+    src: url("fonts/Liquido/LIQUIDO\ Fluid\ 400.otf");
+}
+@font-face {
+    font-family: "Brooklyn";
+    src: url("fonts/Brooklyn-Font/The\ Brooklyn.otf");
+}
+@font-face {
+    font-family: "Monster";
+    src: url("fonts/monster_ag/Monster\ AG.ttf");
+}
+@font-face {
+    font-family: "Gill";
+    src: url("fonts/Gill-Sans-Font/GILLSANS.ttf");
+}
+@font-face {
+    font-family: "Proxima";
+    src: url("fonts/Proxima-Nova-Font/Proxima\ Nova\ Font.otf");
+}
