@@ -3,6 +3,68 @@ $(document).ready(($)=>{
   var size = {width: $(window).width(), height: $(window).height()}
   var docSize = {width: $("body").width(), height: $("body").height()}
 
+
+var menuOpen = false;
+
+function adjustScroll(){
+  if(menuOpen){
+    $("body, .page").css("overflow-y", "auto");
+  }
+  {
+  }
+}
+
+
+
+$("#menu-toggle").click((e)=>{
+  e.preventDefault();
+  if(menuOpen){
+    $("body, .page").css("overflow-y", "auto");
+    menuOpen = false;
+    anime({
+      targets: ".main-links",
+      width: "130px",
+      height: "50vh",
+      backgroundColor: "#90f",
+      opacity: .5,
+      translateX: [0, "-120vw"],
+      duration: 4000
+    })
+  
+  }
+  else{
+    menuOpen = true;
+    $("body, .page").css("overflow-y", "hidden");
+    anime({
+      targets: ".main-links",
+      width: "100vw",
+      height: "100vh",
+      borderRadius: ["50%", 0],
+      opacity: 1,
+      backgroundColor: "#fff",
+      translateX: ["100%", 0],
+      duration: 2000
+    })
+  }
+  console.log(menuOpen)
+})  
+
+$(".main-links a").click((e)=>{
+  menuOpen = false;
+  adjustScroll();  
+  anime({
+    targets: ".main-links",
+    width: "130px",
+    height: "50vh",
+    backgroundColor: "#90f",
+    opacity: .5,
+    translateX: [0, "-120vw"],
+    duration: 4000
+  })
+
+
+})
+
   $(window).scroll((event)=>{
     let fromTop  = $(window).scrollTop();
     if(fromTop > size.height - 200){
@@ -27,31 +89,31 @@ $(document).ready(($)=>{
     }
   })
 
-$(document).mousemove(function(event) {
-      currentMousePos.x = Math.min(event.pageX, size.width);
-      currentMousePos.y = Math.min(event.pageY, size.height);
-      anime({
-        targets: ".cursor",
-        left: currentMousePos.x,
-        top: currentMousePos.y,
-      })
-  });
-  $(document).mousedown(function(e){
-    anime({
-      targets: ".cursor",
-      borderSize: 3,
-      borderColor: "deeppink",
-      duration: 300
-    })
-  })
-  $(document).mouseup(function(e){
-    anime({
-      targets: ".cursor",
-      borderSize: 1,
-      borderColor: "#9900ff",
-      duration: 300
-    })
-  })
+// $(document).mousemove(function(event) {
+//       currentMousePos.x = Math.min(event.pageX, size.width);
+//       currentMousePos.y = Math.min(event.pageY, size.height);
+//       anime({
+//         targets: ".cursor",
+//         left: currentMousePos.x,
+//         top: currentMousePos.y,
+//       })
+//   });
+  // $(document).mousedown(function(e){
+  //   anime({
+  //     targets: ".cursor",
+  //     borderSize: 3,
+  //     borderColor: "deeppink",
+  //     duration: 300
+  //   })
+  // })
+  // $(document).mouseup(function(e){
+  //   anime({
+  //     targets: ".cursor",
+  //     borderSize: 1,
+  //     borderColor: "#9900ff",
+  //     duration: 300
+  //   })
+  // })
 
   anime({
         targets: '.small-sections',
@@ -253,35 +315,75 @@ function isScrolledIntoView(elem, padding = 0)
     return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
 }
 
-(function() {
-    
-  var browser = window,
-      doc = browser.document;
 
-  // If there's a hash, or addEventListener is undefined, stop here
-  if ( !location.hash || !browser.addEventListener ) {
+(function($) { "use strict";
+ 
+ 	//Parallax            
 
-    //set to 1
-    window.scrollTo( 0, 1 );
-    var scrollTop = 1,
+	//Page cursors
 
-    //reset to 0 if needed
-    checkWindowBody = setInterval(function(){
-      if( doc.body ){
-        clearInterval( checkWindowBody );
-        scrollTop = "scrollTop" in doc.body ? doc.body.scrollTop : 1;
-        browser.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
-      } 
-    }, 15 );
-
-    if (browser.addEventListener) {
-      browser.addEventListener("load", function(){
-        setTimeout(function(){
-          //reset to hide address
-          browser.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
-        }, 0);
-      }, false );
+    document.getElementsByTagName("body")[0].addEventListener("mousemove", function(n) {
+        t.style.left = n.clientX + "px", 
+		t.style.top = n.clientY + "px", 
+		e.style.left = n.clientX + "px", 
+		e.style.top = n.clientY + "px", 
+		i.style.left = n.clientX + "px", 
+		i.style.top = n.clientY + "px"
+    });
+    var t = document.getElementById("cursor"),
+        e = document.getElementById("cursor2"),
+        i = document.getElementById("cursor3");
+    function n(t) {
+        e.classList.add("hover"), i.classList.add("hover")
     }
-  }
+    function s(t) {
+        e.classList.remove("hover"), i.classList.remove("hover")
+    }
+    s();
+    for (var r = document.querySelectorAll(".cursor"), a = r.length - 1; a >= 0; a--) {
+        o(r[a])
+    }
+    function o(t) {
+        t.addEventListener("mouseover", n), t.addEventListener("mouseout", s)
+    }              
+              
+  
+//Scroll back to top
+              
+$(document).ready(function() {	
+		var offset = 300;
+		var duration = 400;
+		jQuery(window).on('scroll', function() {
+			if (jQuery(this).scrollTop() > offset) {
+				jQuery('.scroll-to-top').addClass('active-arrow');
+			} else {
+				jQuery('.scroll-to-top').removeClass('active-arrow');
+			}
+		});				
+		jQuery('.scroll-to-top').on('click', function(event) {
+			event.preventDefault();
+			jQuery('html, body').animate({scrollTop: 0}, duration);
+			return false;
+		})
+  
+  		
+		/* Hero Case study images */			
+		
+		$('.main-links a:nth-child(1)').trigger('mouseenter')
+  
+  });            
+              
+})(jQuery); 
 
-})();
+
+
+
+
+
+
+var o = $("#middle-hero");
+$("#middle-hero").on("mousemove", function (t) {
+    var e = -($(window).innerWidth() / 2 - t.pageX) / 30,
+        n = ($(window).innerHeight() / 2 - t.pageY) / 10;
+    o.attr("style", "transform: rotateY(" + e + "deg) rotateX(" + n + "deg);-webkit-transform: rotateY(" + e + "deg) rotateX(" + n + "deg);-moz-transform: rotateY(" + e + "deg) rotateX(" + n + "deg)")
+})
